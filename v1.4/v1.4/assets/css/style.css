@@ -34,17 +34,18 @@ body {
 
 .sidebar-toggle {
   position: fixed;
-  top: 14px;
-  left: 14px;
+  top: 20px;
+  left: 230px;
   z-index: 20;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--panel);
+  width: 56px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--text);
   cursor: pointer;
   padding: 0;
@@ -52,16 +53,15 @@ body {
 }
 
 .sidebar-toggle:hover {
-  background: #f1f4f8;
-  border-color: #cbd3df;
+  background: #f1f1f1;
 }
 
 .toggle-icon {
   position: relative;
   display: block;
-  width: 20px;
-  height: 18px;
-  border: 1.7px solid currentColor;
+  width: 16px;
+  height: 15px;
+  border: 1.5px solid currentColor;
   border-radius: 4px;
 }
 
@@ -70,29 +70,56 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 6px;
-  border-left: 1.7px solid currentColor;
+  left: 5px;
+  border-left: 1.5px solid currentColor;
 }
 
 .toggle-icon span {
   position: absolute;
-  right: 3px;
-  width: 7px;
-  height: 1.5px;
+  right: 2px;
+  width: 5px;
+  height: 1.3px;
   border-radius: 999px;
   background: currentColor;
 }
 
 .toggle-icon span:nth-child(1) {
-  top: 4px;
+  top: 3px;
 }
 
 .toggle-icon span:nth-child(2) {
-  top: 8px;
+  top: 7px;
 }
 
 .toggle-icon span:nth-child(3) {
-  top: 12px;
+  top: 11px;
+}
+
+.toggle-close {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.toggle-close::before,
+.toggle-close::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 1px;
+  width: 13px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.toggle-close::before {
+  transform: rotate(45deg);
+}
+
+.toggle-close::after {
+  transform: rotate(-45deg);
 }
 
 .sr-only {
@@ -117,6 +144,15 @@ body {
 
 .sidebar-collapsed .sidebar {
   transform: translateX(-100%);
+}
+
+.sidebar-collapsed .sidebar-toggle {
+  left: 14px;
+  width: 40px;
+}
+
+.sidebar-collapsed .toggle-close {
+  display: none;
 }
 
 .brand {
