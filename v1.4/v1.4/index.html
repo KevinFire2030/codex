@@ -687,6 +687,56 @@ Codex에게 이 일을 잘 시키기 위한 프롬프트를 먼저 만들어줘.
           </ul>
         </div>
 
+        <h3>.env 파일은 어디에 저장해야 할까?</h3>
+        <p><code>.env</code>는 아무 곳에나 두면 나중에 어떤 설정을 읽는지 헷갈립니다. 실습에서는 프로젝트 루트에 두고, 실제 업무에서는 회사가 승인한 보안 저장소가 있는지도 함께 확인합니다.</p>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-env-location">복사</button>
+          <pre id="prompt-env-location"><code>.env 파일은 어디에 저장해 둬야 할까?
+
+.codex 폴더, 프로젝트 폴더, 별도 폴더 중 어디가 좋은지
+초보자도 이해할 수 있게 비교해서 설명해줘.
+
+다음 형식으로 정리해줘.
+1. 실습에서 추천하는 위치
+2. .codex 폴더에 두면 안 좋은 이유
+3. 별도 보안 저장소를 쓰는 경우
+4. .env와 .env.example의 차이
+5. .gitignore에 넣어야 할 항목
+6. 한 줄 결론</code></pre>
+        </div>
+        <div class="answer-box">
+          <h3>예시 답변</h3>
+          <ol>
+            <li>
+              <strong>실습에서 추천하는 위치</strong>
+              <p>실습이나 프로젝트 단위 설정은 프로젝트 폴더 루트에 두는 것이 가장 자연스럽습니다. 예를 들어 <code>my-project/.env</code>는 그 프로젝트에서 쓰는 SMTP/POP3, API key 이름, 작업 폴더 경로를 담고, <code>my-project/.env.example</code>은 공유용 샘플로 둡니다.</p>
+            </li>
+            <li>
+              <strong>.codex 폴더에 두면 안 좋은 이유</strong>
+              <p><code>.codex</code>는 Codex 설정, 규칙, MCP처럼 Codex가 어떻게 동작할지에 가까운 설정 공간입니다. 메일 계정, 업무 자동화 설정, API key 같은 앱 실행값을 두면 역할이 섞여서 나중에 관리하기 어렵습니다.</p>
+            </li>
+            <li>
+              <strong>별도 보안 저장소를 쓰는 경우</strong>
+              <p>실제 업무나 운영 환경에서는 회사가 승인한 secret manager, Windows Credential Manager, 사내 보안 저장소가 있다면 그쪽이 더 안전합니다. 이 경우 프로젝트에는 실제 비밀값을 두지 않고, 실행 시 보안 저장소에서 읽는 방식을 씁니다.</p>
+            </li>
+            <li>
+              <strong>.env와 .env.example의 차이</strong>
+              <p><code>.env</code>는 내 PC에서만 쓰는 실제 개인 설정 파일입니다. Git에 올리면 안 됩니다. <code>.env.example</code>은 어떤 환경변수가 필요한지 보여주는 공유용 샘플 파일이고, 실제 비밀번호나 토큰은 비워둡니다.</p>
+            </li>
+            <li>
+              <strong>.gitignore에 넣어야 할 항목</strong>
+              <pre><code>.env
+.env.*
+!.env.example</code></pre>
+              <p>이렇게 하면 실제 <code>.env</code>와 개인별 변형 파일은 제외하고, 공유용 <code>.env.example</code>만 Git에 올릴 수 있습니다.</p>
+            </li>
+            <li>
+              <strong>한 줄 결론</strong>
+              <p>실습에서는 프로젝트 루트에 <code>.env</code>, 공유용으로 <code>.env.example</code>을 두고, Git에는 <code>.env.example</code>만 올리는 방식이 가장 쉽고 안전합니다.</p>
+            </li>
+          </ol>
+        </div>
+
         <div class="split">
           <article>
             <h3>.env에 어떤 정보를 저장하는지</h3>
