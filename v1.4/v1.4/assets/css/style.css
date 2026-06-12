@@ -337,6 +337,10 @@ th {
   color: var(--warn);
 }
 
+.answer-box + .warning {
+  margin-top: 24px;
+}
+
 .steps {
   background: var(--panel);
   border: 1px solid var(--line);
