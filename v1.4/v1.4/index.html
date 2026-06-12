@@ -634,99 +634,138 @@ Codex에게 이 일을 잘 시키기 위한 프롬프트를 먼저 만들어줘.
 
       <section id="env-settings">
         <h2>05. 개인정보 환경변수 설정: .env 활용</h2>
-        <p><code>.env</code>는 개인별로 달라지거나 외부에 노출되면 안 되는 값을 코드와 분리해 내 PC에만 두는 설정 파일입니다. 실습에서는 AD 계정, Knox 계정, 사내 시스템 URL, 작업 폴더, POP3/SMTP 도메인처럼 반복 자동화에 필요한 값을 안전하게 분리하는 흐름을 다룹니다.</p>
+        <p><code>.env</code>는 개인별로 달라지거나 외부에 노출되면 안 되는 값을 코드와 분리해 내 PC에만 두는 설정 파일입니다. 이 섹션에서는 다음 이메일 수/발신 자동화 실습에서 사용할 Knox 메일 SMTP/POP3 설정값을 안전하게 분리하는 흐름을 먼저 준비합니다.</p>
 
         <div class="warning">
-          <strong>실습 전 보안 원칙</strong>
+          <strong>.env가 왜 필요한지</strong>
           <ul>
-            <li>비밀번호, OTP, 인증 토큰은 Codex 프롬프트에 직접 입력하지 않습니다.</li>
-            <li>계정, 메일 주소, 내부 서버 주소는 교육 자료에서 필요 최소한으로만 사용하고, 공유본에는 마스킹합니다.</li>
-            <li>SMTP 사용은 사내 품의와 권한 승인 범위 안에서만 진행합니다.</li>
+            <li>계정, 서버 주소, 작업 폴더처럼 사람마다 다른 값을 코드와 분리합니다.</li>
+            <li>비밀번호, OTP, 토큰 같은 민감정보가 Git이나 교육 자료에 들어가는 일을 막습니다.</li>
+            <li>다음 실습의 이메일 수/발신 자동화에서 같은 설정값을 재사용합니다.</li>
           </ul>
         </div>
 
         <div class="split">
           <article>
-            <h3>.env에 분리할 값</h3>
+            <h3>.env에 어떤 정보를 저장하는지</h3>
             <ul>
-              <li>AD 계정, Knox 계정, 메일 주소처럼 개인마다 다른 값</li>
-              <li>N-ERP, GSCM, Knox Portal 같은 사내 시스템 URL</li>
-              <li>다운로드/작업/결과 저장 폴더 경로</li>
-              <li>받는 메일 서버 예시: <code>pop3.samsung.net</code></li>
-              <li>보내는 메일 서버 예시: <code>smtp.samsung.net</code></li>
+              <li>Knox 메일 주소와 사용자 ID</li>
+              <li>SMTP 서버, 포트, TLS 사용 여부</li>
+              <li>POP3 서버, 포트, SSL 사용 여부</li>
+              <li>첨부파일 다운로드 폴더와 결과 저장 폴더</li>
+              <li>실제 발송을 막는 <code>MAIL_DRY_RUN</code> 설정</li>
             </ul>
           </article>
           <article>
             <h3>공유 전 확인할 것</h3>
             <ul>
               <li><code>.env</code>가 <code>.gitignore</code>에 들어 있는지 확인합니다.</li>
-              <li>코드와 교육 자료에는 실제 비밀번호, 토큰, OTP를 넣지 않습니다.</li>
-              <li>공유용 ZIP에는 개인 설정 파일과 다운로드 결과물을 제외합니다.</li>
-              <li>DRM 문서나 민감정보가 포함된 경로는 샘플 값으로 바꿉니다.</li>
+              <li>공유본에는 실제 비밀번호, OTP, 토큰을 넣지 않습니다.</li>
+              <li>개인 메일 주소와 Knox ID는 마스킹하거나 샘플 값으로 바꿉니다.</li>
+              <li>사내 서버 주소와 내부 URL은 회사 정책에 맞는 범위에서만 표시합니다.</li>
+              <li>공유용 ZIP에는 개인 <code>.env</code>와 다운로드 결과물을 제외합니다.</li>
             </ul>
           </article>
         </div>
 
+        <h3>.env 예제</h3>
+        <p>교육 자료에는 실제 개인 설정이 들어간 <code>.env</code> 대신, 값이 비어 있거나 샘플 값만 들어간 <code>.env.example</code>을 제공합니다. 실제 <code>.env</code>는 각자 PC에서만 만들고 Git에 올리지 않습니다.</p>
+        <pre><code>KNOX_EMAIL_ADDRESS=
+KNOX_EMAIL_USERNAME=
+KNOX_EMAIL_PASSWORD=
+
+SMTP_HOST=smtp.example.local
+SMTP_PORT=587
+SMTP_USE_TLS=true
+
+POP3_HOST=pop3.example.local
+POP3_PORT=995
+POP3_USE_SSL=true
+
+MAIL_ATTACHMENT_DIR=output/attachments
+MAIL_OUTPUT_DIR=output/mail
+MAIL_DRY_RUN=true</code></pre>
+
         <h3>.env 설정하기: 프롬프트 예시</h3>
         <div class="prompt-box">
           <button type="button" data-copy-target="prompt-smtp-setup">복사</button>
-          <pre id="prompt-smtp-setup"><code>첨부한 Outlook POP/IMAP 계정 설정 화면을 기준으로 Knox 메일 SMTP/POP3 설정값을 정리해줘.
+          <pre id="prompt-smtp-setup"><code>Knox 메일을 SMTP/POP3으로 수발신하려고 해.
+뒤의 이메일 자동화 실습에서 사용할 수 있도록 필요한 값들을 .env 형식으로 정리해줘.
 
 요청:
-1. 화면에서 확인되는 서버 설정값을 표로 정리해줘.
-2. Python에서 메일을 보내고 받기 위해 필요한 환경변수 목록을 제안해줘.
-3. AD 계정, Knox 계정, 사내 시스템 URL, 작업 폴더도 함께 .env에 분리하는 예시를 만들어줘.
-4. 실제 송수신 테스트 전에 확인해야 할 보안/품의 항목을 체크리스트로 작성해줘.
+1. SMTP/POP3 수발신에 필요한 환경변수 목록을 만들어줘.
+2. 공유용 .env.example 예시를 작성해줘.
+3. 실제 개인 PC에서 만들 .env에는 어떤 값을 직접 채워야 하는지 알려줘.
+4. .env가 Git에 올라가지 않도록 .gitignore에 추가할 항목을 알려줘.
+5. 다음 이메일 자동화 실습에서 이 값들을 어떻게 사용할지 간단히 설명해줘.
 
 주의:
-- 비밀번호는 절대 출력하지 말고 <SECRET>으로 표시해줘.
-- 개인 메일 주소와 계정 ID는 교육 공유본에서 마스킹해야 한다고 알려줘.</code></pre>
+- 실제 비밀번호, OTP, 인증 토큰은 절대 예시에 넣지 마.
+- 비밀번호 값은 비워두거나 <SECRET>으로 표시해줘.
+- 개인 메일 주소와 Knox ID는 공유본에서 마스킹해야 한다고 알려줘.
+- 사내 서버 주소나 내부 URL은 회사 정책에 맞게 샘플 값으로 처리해줘.
+- 아직 실제 메일을 보내거나 받는 코드는 만들지 말고, 설정값 정리까지만 해줘.</code></pre>
         </div>
         <div class="answer-box">
-          <h3>샘플 답변</h3>
-          <p>첨부 설정 화면을 기준으로 보면 자동화에 필요한 핵심 값은 서버 주소, 사용자 ID, 메일 주소, 작업 폴더입니다. 비밀번호는 코드나 프롬프트에 직접 적지 않고 <code>.env</code> 또는 보안 저장소로 분리해야 합니다.</p>
+          <h3>예시 답변</h3>
+          <p>Knox 메일 자동화에는 메일 계정, SMTP 발신 설정, POP3 수신 설정, 첨부파일 저장 위치, 실제 발송 여부를 제어하는 값이 필요합니다. 실제 비밀번호는 예시에 넣지 않고 개인 PC의 <code>.env</code>에서만 채웁니다.</p>
           <table>
             <thead>
               <tr>
                 <th>항목</th>
-                <th>예시 값</th>
+                <th>환경변수</th>
                 <th>비고</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>받는 메일 서버</td>
-                <td><code>pop3.samsung.net</code></td>
-                <td>POP3 수신 테스트에 사용</td>
+                <td>Knox 메일 주소</td>
+                <td><code>KNOX_EMAIL_ADDRESS</code></td>
+                <td>공유본에서는 <code>user@example.com</code>처럼 마스킹</td>
               </tr>
               <tr>
-                <td>보내는 메일 서버</td>
-                <td><code>smtp.samsung.net</code></td>
-                <td>SMTP 발신 테스트에 사용</td>
-              </tr>
-              <tr>
-                <td>사용자 ID</td>
-                <td><code>&lt;Knox Portal ID&gt;</code></td>
-                <td>공유본에서는 마스킹</td>
+                <td>Knox 사용자 ID</td>
+                <td><code>KNOX_EMAIL_USERNAME</code></td>
+                <td>개인 PC의 <code>.env</code>에서만 실제 값 입력</td>
               </tr>
               <tr>
                 <td>비밀번호</td>
-                <td><code>&lt;SECRET&gt;</code></td>
-                <td><code>.env</code> 또는 보안 저장소 사용</td>
+                <td><code>KNOX_EMAIL_PASSWORD</code></td>
+                <td>예시에는 빈 값 또는 <code>&lt;SECRET&gt;</code>으로 표시</td>
+              </tr>
+              <tr>
+                <td>SMTP/POP3 서버</td>
+                <td><code>SMTP_HOST</code>, <code>POP3_HOST</code></td>
+                <td>회사 정책상 공유 가능 여부 확인</td>
+              </tr>
+              <tr>
+                <td>DRY_RUN</td>
+                <td><code>MAIL_DRY_RUN</code></td>
+                <td>실제 발송 전에는 <code>true</code>로 유지</td>
               </tr>
             </tbody>
           </table>
-          <pre><code>AD_ACCOUNT=&lt;AD ID&gt;
-KNOX_ID=&lt;Knox Portal ID&gt;
-MAIL_ADDRESS=&lt;메일 주소&gt;
-MAIL_PASSWORD=&lt;SECRET&gt;
-KNOX_PORTAL_URL=https://www.samsung.net
-GSCM_URL=https://mdscm.sec.samsung.net
-WORK_DIR=D:\AX\Work
-SMTP_HOST=smtp.samsung.net
-POP3_HOST=pop3.samsung.net
-DRY_RUN=true</code></pre>
-          <p><code>.env</code>를 만들었다면 <code>.gitignore</code>에 포함되어 있는지 먼저 확인합니다. 공유용 자료에는 실제 계정, 비밀번호, 내부 상세 경로를 넣지 않고 샘플 값으로 바꿉니다.</p>
+          <p>공유용 <code>.env.example</code>은 아래처럼 만들 수 있습니다.</p>
+          <pre><code>KNOX_EMAIL_ADDRESS=user@example.com
+KNOX_EMAIL_USERNAME=
+KNOX_EMAIL_PASSWORD=
+
+SMTP_HOST=smtp.example.local
+SMTP_PORT=587
+SMTP_USE_TLS=true
+
+POP3_HOST=pop3.example.local
+POP3_PORT=995
+POP3_USE_SSL=true
+
+MAIL_ATTACHMENT_DIR=output/attachments
+MAIL_OUTPUT_DIR=output/mail
+MAIL_DRY_RUN=true</code></pre>
+          <p><code>.gitignore</code>에는 최소한 아래 항목을 추가합니다.</p>
+          <pre><code>.env
+output/
+*.log</code></pre>
+          <p>다음 이메일 자동화 실습에서는 Python 코드가 이 환경변수를 읽어서 SMTP 발신, POP3 수신, 첨부 저장 폴더, <code>DRY_RUN</code> 여부를 결정하게 됩니다. 실제 업무 적용 전에는 SMTP 사용 품의, 발송 대상 제한, 로그 보관 기준, 사내 보안 정책을 먼저 확인해야 합니다.</p>
         </div>
       </section>
 
@@ -980,7 +1019,7 @@ if __name__ == "__main__":
           <p>완료했습니다.</p>
           <p>GSCM에서 <code>SCM &gt; Executive Report &gt; PSI</code> 화면 기준으로 <code>Apply</code> 실행 후 엑셀 다운로드했습니다.</p>
           <ul>
-            <li>저장된 파일: <code>C:\Users\ih15.hwang\Downloads\PSI.xlsx</code></li>
+            <li>저장된 파일: <code>C:\Users\sample.user\Downloads\PSI.xlsx</code></li>
             <li>파일 크기: <code>84,244 bytes</code></li>
           </ul>
           <p>이 예시는 사용자가 명시한 사내 시스템 화면에서 조회 조건을 적용하고 결과 파일을 저장하는 흐름입니다. 다운로드한 파일의 사내 데이터는 교육 공유본에 첨부하지 않습니다.</p>
@@ -1656,15 +1695,15 @@ TC.zip 파일을 풀면 하위 폴더에 엑셀이 많이 들어 있어.
           <pre><code>D:\AX\PRJs\github\CodexPlaybook\.env</code></pre>
           <p>실습에서는 아래처럼 SMTP/POP3 설정을 저장했습니다. 비밀번호는 사용자가 직접 채우도록 빈 값으로 둡니다.</p>
           <pre><code># Knox mail / SMTP settings
-KNOX_EMAIL_ADDRESS=ih15.hwang@samsung.com
-KNOX_EMAIL_USERNAME=ih15.hwang
+KNOX_EMAIL_ADDRESS=user@example.com
+KNOX_EMAIL_USERNAME=sample.user
 KNOX_EMAIL_PASSWORD=
 
-SMTP_HOST=smtp.samsung.net
+SMTP_HOST=smtp.example.local
 SMTP_PORT=587
 SMTP_USE_TLS=true
 
-POP3_HOST=pop3.samsung.net
+POP3_HOST=pop3.example.local
 POP3_PORT=995
 POP3_USE_SSL=true</code></pre>
           <p>그리고 <code>.gitignore</code>에 아래 항목을 추가해서 실제 <code>.env</code> 파일이 Git에 올라가지 않게 했습니다.</p>
