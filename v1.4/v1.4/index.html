@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
-    <button class="sidebar-toggle" type="button" aria-controls="playbook-sidebar" aria-expanded="true">
-      <span aria-hidden="true">☰</span>
-      <span>목차</span>
+    <button class="sidebar-toggle" type="button" aria-controls="playbook-sidebar" aria-expanded="true" aria-label="목차 닫기">
+      <span class="toggle-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="sr-only">목차 토글</span>
     </button>
     <aside id="playbook-sidebar" class="sidebar" aria-label="목차">
       <div class="brand">

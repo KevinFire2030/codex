@@ -122,7 +122,7 @@ function setSidebarCollapsed(collapsed) {
   document.body.classList.toggle("sidebar-collapsed", collapsed);
   if (sidebarToggle) {
     sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
-    sidebarToggle.querySelector("span[aria-hidden]")?.replaceChildren(collapsed ? "☰" : "×");
+    sidebarToggle.setAttribute("aria-label", collapsed ? "목차 열기" : "목차 닫기");
   }
   window.localStorage.setItem(sidebarStateKey, collapsed ? "true" : "false");
 }
