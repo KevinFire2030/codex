@@ -105,7 +105,7 @@
 
       <section id="meet-codex">
         <h2>01. 처음 만나는 Codex</h2>
-        <p>공식 용어집 기준으로 Codex는 소프트웨어 개발 작업을 위한 OpenAI의 coding agent입니다. 단순히 답변만 하는 챗봇이 아니라, 선택한 프로젝트 폴더를 읽고, 파일을 수정하고, 명령을 실행하고, 결과를 확인하는 작업자에 가깝습니다.</p>
+        <p>쉽게 말해 Codex는 내가 선택한 작업 폴더 안에서 파일을 읽고, 필요한 변경을 제안하고, 명령을 실행하고, 결과까지 확인하는 AI 작업자입니다. ChatGPT가 대화로 방향을 잡아주는 도구라면, Codex는 내 작업 공간 안에서 실제 산출물까지 함께 만들어 가는 도구에 가깝습니다.</p>
         <div class="split">
           <article>
             <h3>ChatGPT와 다른 점</h3>
@@ -113,14 +113,18 @@
               <li>ChatGPT는 대화와 지식 작업 중심입니다.</li>
               <li>Codex는 폴더, 파일, 터미널, Git 변경사항을 함께 다룹니다.</li>
               <li>Codex는 작업을 끝내기 위해 읽기, 수정, 실행, 검토 루프를 수행합니다.</li>
+              <li>운전에 비유하면 ChatGPT는 길을 알려주는 내비게이션, Codex는 목적지까지 실제로 움직이는 자율주행에 가깝습니다.</li>
+              <li>요리에 비유하면 ChatGPT는 레시피를 설명해주는 역할, Codex는 재료를 보고 조리하고 결과를 확인하는 요리사 역할에 가깝습니다.</li>
+              <li>사무 업무에 비유하면 ChatGPT는 옆에서 조언해주는 선배, Codex는 내 PC의 작업 폴더를 보며 같이 처리하는 실무 동료에 가깝습니다.</li>
             </ul>
           </article>
           <article>
-            <h3>Copilot, Cursor, Claude Code와 비교할 때</h3>
+            <h3>회사에서 사용 가능한 Codex, Claude Code, Gemini CLI 비교</h3>
             <ul>
-              <li>Codex는 App, CLI, IDE extension, Cloud, SDK 표면을 함께 제공합니다.</li>
-              <li>Codex 앱은 여러 thread, worktree, automation, Git 검토 흐름에 강점이 있습니다.</li>
-              <li>CLI와 IDE extension은 로컬 개발 환경에서 빠르게 작업을 맡길 때 적합합니다.</li>
+              <li>Codex는 앱 화면에서 프로젝트 폴더를 고르고, 파일 변경과 실행 결과를 보며 실습하기 좋습니다.</li>
+              <li>Claude Code는 코드나 문서 구조를 깊게 읽고 수정 방향을 길게 설명받을 때 유용합니다.</li>
+              <li>Gemini CLI는 터미널에서 빠르게 명령형 작업을 맡기거나 로컬 파일 흐름을 자동화할 때 적합합니다.</li>
+              <li>지원팀 첫 실습에서는 화면으로 확인하기 쉬운 Codex 앱을 기본 도구로 사용하고, 나머지는 업무 성격과 권한 범위에 따라 선택합니다.</li>
             </ul>
           </article>
         </div>
@@ -156,6 +160,44 @@
             </li>
           </ol>
           <p><strong>한 줄로 말하면: ChatGPT는 "질문에 답하는 AI"이고, Codex는 "내 작업 공간에서 파일을 읽고 고치고 검증하는 AI 작업자"입니다.</strong></p>
+        </div>
+        <h3>언제 Codex를 쓰고 언제 ChatGPT를 쓰면 좋을까?</h3>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-chatgpt-vs-codex">복사</button>
+          <pre id="prompt-chatgpt-vs-codex"><code>ChatGPT와 Codex를 둘 다 사용할 수 있는 환경이라고 가정하고, 언제 ChatGPT를 쓰고 언제 Codex를 쓰면 좋은지 알려줘.
+
+지원팀 구성원이 이해할 수 있게 다음 형식으로 정리해줘.
+1. ChatGPT가 더 적합한 상황
+2. Codex가 더 적합한 상황
+3. 둘 중 무엇을 쓸지 고르는 판단 기준
+4. 무조건 Codex를 쓰면 안 되는 경우
+5. 한 줄 결론</code></pre>
+        </div>
+        <div class="answer-box">
+          <h3>예시 답변</h3>
+          <p>둘 다 사용할 수 있다면 무조건 Codex만 쓰는 것이 정답은 아닙니다. <strong>대화로 생각을 정리하거나 빠르게 설명을 듣고 싶을 때는 ChatGPT</strong>, <strong>내 폴더와 파일을 실제로 읽고 결과물을 만들어야 할 때는 Codex</strong>가 더 잘 맞습니다.</p>
+          <ol>
+            <li>
+              <strong>ChatGPT가 더 적합한 상황</strong>
+              <p>업무 메일 문장 다듬기, 회의 내용 요약, 개념 설명, 아이디어 정리, 보고서 목차 잡기처럼 파일을 직접 열거나 수정하지 않아도 되는 작업에 좋습니다.</p>
+            </li>
+            <li>
+              <strong>Codex가 더 적합한 상황</strong>
+              <p>특정 폴더의 파일 구조를 분석하거나, 여러 엑셀 파일을 병합하거나, HTML 문서를 고치거나, 실행 결과를 확인해야 하는 작업에 좋습니다. 즉 "말로 설명"보다 "내 작업 공간에서 실제 처리"가 필요하면 Codex가 어울립니다.</p>
+            </li>
+            <li>
+              <strong>둘 중 무엇을 쓸지 고르는 판단 기준</strong>
+              <p>붙여넣은 텍스트만으로 충분하면 ChatGPT를 쓰고, 로컬 폴더, 파일, 명령 실행, 결과 검증이 필요하면 Codex를 씁니다. 산출물이 파일로 남아야 하는지도 중요한 기준입니다.</p>
+            </li>
+            <li>
+              <strong>무조건 Codex를 쓰면 안 되는 경우</strong>
+              <p>민감정보, 비밀번호, OTP, 고객정보, DRM 문서 원문처럼 접근 권한과 보안 검토가 필요한 내용은 Codex에 바로 맡기면 안 됩니다. 또한 단순 질문 하나를 빠르게 확인하는 일이라면 ChatGPT가 더 간단할 수 있습니다.</p>
+            </li>
+            <li>
+              <strong>한 줄 결론</strong>
+              <p>생각을 정리하고 답을 듣는 일은 ChatGPT, 내 파일과 폴더에서 실제 작업을 맡기는 일은 Codex로 구분하면 됩니다.</p>
+            </li>
+          </ol>
         </div>
       </section>
 
