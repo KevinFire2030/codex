@@ -341,6 +341,10 @@ th {
   margin-top: 24px;
 }
 
+.warning + h3 {
+  margin-top: 28px;
+}
+
 .steps {
   background: var(--panel);
   border: 1px solid var(--line);
