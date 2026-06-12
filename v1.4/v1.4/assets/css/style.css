@@ -381,6 +381,12 @@ th {
   color: var(--accent);
 }
 
+.answer-box + h3 {
+  border-top: 1px solid var(--line);
+  margin-top: 34px;
+  padding-top: 28px;
+}
+
 .answer-box li p {
   color: #374151;
   margin: 4px 0 10px;
