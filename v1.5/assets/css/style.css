@@ -349,6 +349,10 @@ th {
   margin-top: 28px;
 }
 
+.section-gap {
+  margin-top: 30px;
+}
+
 .steps,
 .practice-steps {
   background: var(--panel);
