@@ -30,6 +30,8 @@ function buildPromptCollection() {
     const sectionTitle = prompt.closest("section")?.querySelector("h2")?.innerText.trim() || "";
     const promptTitle = getPromptTitle(promptBox);
     const promptNumber = String(index + 1).padStart(2, "0");
+    const essentialLabel = promptBox?.querySelector(".essential-badge")?.innerText.trim();
+    const titlePrefix = essentialLabel ? `${essentialLabel} · ` : "";
     const cardId = `prompt-card-${prompt.id}`;
 
     const card = document.createElement("article");
@@ -41,7 +43,7 @@ function buildPromptCollection() {
 
     const title = document.createElement("div");
     title.className = "prompt-card-title";
-    title.innerHTML = `<strong>#${promptNumber}. ${promptTitle}</strong><span>${sectionTitle}</span>`;
+    title.innerHTML = `<strong>${titlePrefix}#${promptNumber}. ${promptTitle}</strong><span>${sectionTitle}</span>`;
 
     const button = document.createElement("button");
     button.type = "button";
@@ -58,7 +60,7 @@ function buildPromptCollection() {
     collection.appendChild(card);
 
     if (!groups.has(sectionTitle)) groups.set(sectionTitle, []);
-    groups.get(sectionTitle).push({ number: promptNumber, title: promptTitle, cardId });
+    groups.get(sectionTitle).push({ number: promptNumber, title: promptTitle, cardId, essentialLabel });
   });
 
   if (!indexList) return;
@@ -78,7 +80,7 @@ function buildPromptCollection() {
       const row = document.createElement("li");
       const link = document.createElement("a");
       link.href = `#${item.cardId}`;
-      link.innerText = `#${item.number}. ${item.title}`;
+      link.innerText = `${item.essentialLabel ? `${item.essentialLabel} · ` : ""}#${item.number}. ${item.title}`;
       row.appendChild(link);
       list.appendChild(row);
     });

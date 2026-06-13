@@ -389,6 +389,46 @@ th {
   margin-top: 18px;
 }
 
+.essential-practice {
+  border: 1px solid #b7c7ff;
+  border-radius: 8px;
+  background: #f8fbff;
+  margin-top: 22px;
+  padding: 18px;
+}
+
+.essential-practice h3 {
+  color: var(--accent);
+  margin-top: 0;
+}
+
+.essential-prompt {
+  border-color: #9db7ff;
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.essential-badge {
+  display: inline-flex;
+  align-items: center;
+  margin: 12px 0 0 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 7px 10px;
+}
+
+.essential-prompt button {
+  display: inline-block;
+  float: right;
+}
+
+.essential-prompt pre {
+  clear: both;
+}
+
 .answer-box {
   border: 1px solid #c7d7f3;
   border-radius: 8px;
