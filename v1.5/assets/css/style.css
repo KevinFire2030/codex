@@ -95,31 +95,26 @@ body {
   top: 11px;
 }
 
-.toggle-close {
-  position: relative;
+.toggle-icon-collapsed {
+  display: none;
+}
+
+.sidebar-collapsed .toggle-icon-expanded {
+  display: none;
+}
+
+.sidebar-collapsed .toggle-icon-collapsed {
   display: block;
-  width: 14px;
-  height: 14px;
 }
 
-.toggle-close::before,
-.toggle-close::after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 1px;
-  width: 13px;
-  height: 1.5px;
-  border-radius: 999px;
-  background: currentColor;
+.toggle-icon-collapsed::before {
+  left: auto;
+  right: 5px;
 }
 
-.toggle-close::before {
-  transform: rotate(45deg);
-}
-
-.toggle-close::after {
-  transform: rotate(-45deg);
+.toggle-icon-collapsed span {
+  left: 2px;
+  right: auto;
 }
 
 .sr-only {
@@ -152,9 +147,6 @@ body {
   width: 40px;
 }
 
-.sidebar-collapsed .toggle-close {
-  display: none;
-}
 
 .brand {
   border-bottom: 1px solid var(--line);
