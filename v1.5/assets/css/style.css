@@ -357,6 +357,10 @@ th {
   padding: 18px 18px 18px 38px;
 }
 
+.practice-steps {
+  margin-top: 18px;
+}
+
 .formula {
   display: grid;
   gap: 10px;
