@@ -2084,6 +2084,30 @@ Copy-Item `
 아직 파일을 수정하거나 삭제하지 말고, 계획만 제안해줘.</code></pre>
         </div>
 
+        <h3>실제 예시: PSI Data 분석 계획 세우기</h3>
+        <p>앞에서 다운로드했거나 실습 자료에 포함된 PSI 샘플 엑셀을 기준으로, 바로 복사해서 분석 계획을 요청할 수 있는 예시입니다.</p>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-analysis-psi-plan">복사</button>
+          <pre id="prompt-analysis-psi-plan"><code>examples/psi-dashboard/PSI-sample.xlsx 파일을 분석하기 전에 먼저 분석 계획을 세워줘.
+
+목표:
+PSI 데이터를 읽어서 월별, Category별, Region별 흐름을 확인하고 싶어.
+특히 DEMAND(GI), GI, SHORT, INVENTORY, ARRIVAL, SHIPMENT, PROD 같은 Category가 어떤 의미로 집계될 수 있는지 보고 싶어.
+이상치나 특정 월에 값이 크게 튀는 구간도 확인하고 싶어.
+
+출력:
+1. 필요한 데이터 파일과 시트/컬럼 후보
+2. 데이터 품질 점검 항목
+3. 분석 단계
+4. 만들어야 할 표/그래프
+5. 결과 해석 시 주의점
+
+제약:
+- 원본 PSI-sample.xlsx는 수정하지 마.
+- 실제 고객명, 거래처명, 내부 코드는 화면에 그대로 노출하지 말고 마스킹 기준을 제안해줘.
+- 아직 dashboard.html이나 결과 파일을 만들지 말고, 계획만 제안해줘.</code></pre>
+        </div>
+
         <h3>실습 예시: PSI 엑셀 RAW 데이터로 대시보드 만들기</h3>
         <div class="prompt-box">
           <button type="button" data-copy-target="prompt-psi-dashboard">복사</button>
