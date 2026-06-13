@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PSI Dashboard</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7fa;
+        --panel: #ffffff;
+        --ink: #172033;
+        --muted: #667085;
+        --line: #d9e0ea;
+        --blue: #2563eb;
+        --teal: #0891b2;
+        --amber: #d97706;
+        --rose: #e11d48;
+        --green: #15803d;
+        --shadow: 0 12px 28px rgba(23, 32, 51, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+        line-height: 1.5;
+      }
+
+      header {
+        background: #ffffff;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .wrap {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px 0 22px;
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 760;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 6px 12px;
+        border: 1px solid #bdd7ff;
+        border-radius: 6px;
+        background: #eef6ff;
+        color: #174ea6;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      main {
+        padding: 24px 0 40px;
+      }
+
+      .notice {
+        margin-bottom: 18px;
+        padding: 12px 14px;
+        border: 1px solid #f6c453;
+        border-radius: 6px;
+        background: #fff8e6;
+        color: #6b4e00;
+        font-size: 13px;
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .kpi,
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .kpi {
+        padding: 16px;
+        min-height: 116px;
+      }
+
+      .kpi span {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .kpi strong {
+        display: block;
+        margin-top: 14px;
+        font-size: 26px;
+        letter-spacing: 0;
+      }
+
+      .kpi small {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.45fr 1fr;
+        gap: 18px;
+      }
+
+      .panel {
+        padding: 18px;
+        min-width: 0;
+      }
+
+      .panel h2 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+
+      .panel p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .chart {
+        display: grid;
+        grid-template-columns: 48px repeat(6, minmax(50px, 1fr));
+        align-items: end;
+        gap: 12px;
+        min-height: 280px;
+        padding-top: 8px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .axis {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 220px;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: right;
+      }
+
+      .bar-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+        gap: 4px;
+        height: 220px;
+      }
+
+      .bar {
+        border-radius: 4px 4px 0 0;
+        min-height: 3px;
+      }
+
+      .bar.demand {
+        background: var(--blue);
+      }
+
+      .bar.gi {
+        background: var(--teal);
+      }
+
+      .bar.short {
+        background: var(--rose);
+      }
+
+      .month {
+        grid-column: span 3;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+        border-radius: 2px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      th,
+      td {
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--line);
+        text-align: right;
+        vertical-align: middle;
+      }
+
+      th:first-child,
+      td:first-child {
+        text-align: left;
+      }
+
+      th {
+        color: #475467;
+        font-size: 12px;
+        font-weight: 760;
+        background: #f8fafc;
+      }
+
+      .risk-high {
+        color: var(--rose);
+        font-weight: 760;
+      }
+
+      .risk-good {
+        color: var(--green);
+        font-weight: 760;
+      }
+
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media (max-width: 980px) {
+        .kpis {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .wrap {
+          width: min(100% - 20px, 1180px);
+        }
+
+        .kpis {
+          grid-template-columns: 1fr;
+        }
+
+        .chart {
+          grid-template-columns: 38px repeat(6, minmax(34px, 1fr));
+          gap: 6px;
+        }
+
+        th,
+        td {
+          padding: 8px 6px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap topbar">
+        <div>
+          <h1>PSI Dashboard</h1>
+          <p class="subtitle">Source: PSI.xlsx / Sheet1 / Scenario: 202624_M / Generated from read-only RAW data</p>
+        </div>
+        <span class="badge">Region values masked</span>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="notice">
+        원본 파일은 수정하지 않았습니다. Region명은 교육용 화면에서 <strong>Region_01</strong> 형식으로 마스킹했습니다.
+      </div>
+
+      <section class="kpis" aria-label="핵심 KPI">
+        <article class="kpi">
+          <span>Total Demand</span>
+          <strong>326.5M</strong>
+          <small>DEMAND(GI), Total</small>
+        </article>
+        <article class="kpi">
+          <span>Total GI</span>
+          <strong>282.8M</strong>
+          <small>GI, Total</small>
+        </article>
+        <article class="kpi">
+          <span>Total Short</span>
+          <strong>44.2M</strong>
+          <small>SHORT, Total</small>
+        </article>
+        <article class="kpi">
+          <span>Inventory</span>
+          <strong>6.7M</strong>
+          <small>INVENTORY, Total</small>
+        </article>
+        <article class="kpi">
+          <span>Fulfillment</span>
+          <strong>86.6%</strong>
+          <small>GI / DEMAND(GI)</small>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>월별 Demand / GI / Short 추이</h2>
+          <p>월 합계 컬럼 Jun~Nov를 기준으로 주요 PSI 지표를 비교합니다.</p>
+          <div class="chart" aria-label="월별 막대 차트">
+            <div class="axis">
+              <span>80M</span>
+              <span>60M</span>
+              <span>40M</span>
+              <span>20M</span>
+              <span>0</span>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 89.5%" title="Jun Demand 71.6M"></div>
+                <div class="bar gi" style="height: 81.6%" title="Jun GI 65.3M"></div>
+                <div class="bar short" style="height: 8.5%" title="Jun Short 6.8M"></div>
+              </div>
+              <div class="month">Jun</div>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 86.4%" title="Jul Demand 69.2M"></div>
+                <div class="bar gi" style="height: 73.5%" title="Jul GI 58.8M"></div>
+                <div class="bar short" style="height: 13.0%" title="Jul Short 10.4M"></div>
+              </div>
+              <div class="month">Jul</div>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 77.7%" title="Aug Demand 62.2M"></div>
+                <div class="bar gi" style="height: 63.7%" title="Aug GI 51.0M"></div>
+                <div class="bar short" style="height: 14.0%" title="Aug Short 11.2M"></div>
+              </div>
+              <div class="month">Aug</div>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 84.9%" title="Sep Demand 67.9M"></div>
+                <div class="bar gi" style="height: 71.1%" title="Sep GI 56.9M"></div>
+                <div class="bar short" style="height: 13.8%" title="Sep Short 11.0M"></div>
+              </div>
+              <div class="month">Sep</div>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 47.9%" title="Oct Demand 38.3M"></div>
+                <div class="bar gi" style="height: 44.4%" title="Oct GI 35.6M"></div>
+                <div class="bar short" style="height: 3.5%" title="Oct Short 2.8M"></div>
+              </div>
+              <div class="month">Oct</div>
+            </div>
+            <div>
+              <div class="bar-group">
+                <div class="bar demand" style="height: 21.7%" title="Nov Demand 17.3M"></div>
+                <div class="bar gi" style="height: 19.2%" title="Nov GI 15.4M"></div>
+                <div class="bar short" style="height: 2.5%" title="Nov Short 2.0M"></div>
+              </div>
+              <div class="month">Nov</div>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i style="background: var(--blue)"></i>Demand</span>
+            <span><i style="background: var(--teal)"></i>GI</span>
+            <span><i style="background: var(--rose)"></i>Short</span>
+          </div>
+        </article>
+
+        <div class="stack">
+          <article class="panel">
+            <h2>Category 요약</h2>
+            <p>Total 컬럼 기준 주요 Category 합계입니다.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>DEMAND(GI)</td><td>326.5M</td></tr>
+                <tr><td>GI</td><td>282.8M</td></tr>
+                <tr><td>ARRIVAL</td><td>268.3M</td></tr>
+                <tr><td>SHIPMENT</td><td>255.1M</td></tr>
+                <tr><td>PROD</td><td>251.9M</td></tr>
+                <tr><td>SHORT</td><td class="risk-high">44.2M</td></tr>
+                <tr><td>INVENTORY</td><td>6.7M</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="panel">
+            <h2>월별 요약표</h2>
+            <p>단위는 백만 기준으로 표시합니다.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Demand</th>
+                  <th>GI</th>
+                  <th>Short</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Jun</td><td>71.6</td><td>65.3</td><td>6.8</td></tr>
+                <tr><td>Jul</td><td>69.2</td><td>58.8</td><td>10.4</td></tr>
+                <tr><td>Aug</td><td>62.2</td><td>51.0</td><td>11.2</td></tr>
+                <tr><td>Sep</td><td>67.9</td><td>56.9</td><td>11.0</td></tr>
+                <tr><td>Oct</td><td>38.3</td><td>35.6</td><td>2.8</td></tr>
+                <tr><td>Nov</td><td>17.3</td><td>15.4</td><td>2.0</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 18px">
+        <h2>Region별 Short 위험 후보 Top 10</h2>
+        <p>Region명은 원본 값을 노출하지 않고 마스킹했습니다. Short가 큰 순서로 정렬했습니다.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Region</th>
+              <th>Demand</th>
+              <th>GI</th>
+              <th>Short</th>
+              <th>Inventory</th>
+              <th>Fulfillment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Region_02</td><td>27.7M</td><td>23.6M</td><td class="risk-high">4.1M</td><td>0.3M</td><td>85.4%</td></tr>
+            <tr><td>Region_08</td><td>23.0M</td><td>19.0M</td><td class="risk-high">4.0M</td><td>0.3M</td><td>82.6%</td></tr>
+            <tr><td>Region_03</td><td>30.7M</td><td>26.9M</td><td class="risk-high">3.8M</td><td>0.9M</td><td>87.7%</td></tr>
+            <tr><td>Region_09</td><td>14.6M</td><td>11.3M</td><td class="risk-high">3.3M</td><td>0.1M</td><td>77.5%</td></tr>
+            <tr><td>Region_06</td><td>20.8M</td><td>17.7M</td><td class="risk-high">3.1M</td><td>0.6M</td><td>85.3%</td></tr>
+            <tr><td>Region_07</td><td>13.9M</td><td>12.6M</td><td>1.4M</td><td>0.2M</td><td class="risk-good">90.7%</td></tr>
+            <tr><td>Region_01</td><td>19.0M</td><td>17.7M</td><td>1.3M</td><td>0.5M</td><td class="risk-good">93.2%</td></tr>
+            <tr><td>Region_04</td><td>3.9M</td><td>3.4M</td><td>0.5M</td><td>0.0M</td><td>87.4%</td></tr>
+            <tr><td>Region_11</td><td>6.7M</td><td>6.4M</td><td>0.3M</td><td>0.5M</td><td class="risk-good">95.3%</td></tr>
+            <tr><td>Region_05</td><td>1.6M</td><td>1.4M</td><td>0.2M</td><td>0.1M</td><td>88.0%</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <p class="footer-note">
+        Dashboard generated for Codex Playbook practice. Product-level analysis was not included because the source sheet did not expose a separate Product column.
+      </p>
+    </main>
+  </body>
+</html>
