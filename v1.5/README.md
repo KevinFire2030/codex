@@ -1,4 +1,4 @@
-# Codex Playbook v1.4
+# Codex 활용 Playbook v1.5
 
 지원팀 대상 Codex 실습 교육에서 사용하는 HTML 기반 플레이북입니다.
 
@@ -8,7 +8,7 @@
 
 교육 참석자는 개인 PC에서 화면을 좌우로 나누어 사용합니다.
 
-- 왼쪽: Codex Playbook
+- 왼쪽: Codex 활용 Playbook
 - 오른쪽: Codex 앱
 
 플레이북의 예시 프롬프트를 복사해 Codex 앱에 붙여 넣으며 실습합니다.
@@ -26,12 +26,12 @@
 브라우저에서 아래 파일을 엽니다.
 
 ```text
-v1.4/index.html
+v1.5/index.html
 ```
 
 별도 설치나 빌드 없이 동작합니다.
 
-## v1.4 구성
+## v1.5 구성
 
 1. 처음 만나는 Codex
 2. Codex App, CLI, IDE 중 무엇부터?
@@ -64,6 +64,12 @@ v1.4/index.html
 - DRM 문서는 우회하지 않고 회사 정책상 허용된 프로세스와 권한 범위 안에서만 다룹니다.
 - 실습 자료에는 실제 고객명, 거래처명, 내부 코드 대신 마스킹된 샘플 데이터를 사용합니다.
 
-## 공식 문서 근거
+## 참고 문서
 
-v1.4 콘텐츠는 `docs/official-sources.md`에 정리한 OpenAI 공식 Codex 문서를 기준으로 작성했습니다. 사내 시스템, Knox, GSCM, DRM 관련 내용은 공식 Codex 문서가 아니라 교육용 시나리오와 보안 주의사항으로만 다룹니다.
+v1.5 콘텐츠는 `docs/official-sources.md`에 정리한 OpenAI 공식 Codex 문서를 참고해 작성했습니다. 사내 시스템, Knox, GSCM, SMTP, DRM 관련 내용은 공식 Codex 문서가 아니라 교육용 시나리오와 보안 주의사항으로만 다룹니다.
+
+## 배포
+
+실습 전 배포용 ZIP은 저장소 루트의 `dist/codex-playbook-v1.5.zip`으로 생성합니다.
+
+배포 ZIP에는 `v1.5/index.html`, `assets`, `docs`, `examples`, `prompts`, `README.md`만 포함하고, `.env`, 작업 기록 문서, 이전 버전 폴더, Git 메타데이터는 포함하지 않습니다.

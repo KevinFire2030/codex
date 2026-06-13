@@ -1,6 +1,6 @@
-# Official Sources
+# 참고 문서
 
-v1.4 콘텐츠 작성 시 확인한 OpenAI 공식 Codex 문서입니다.
+v1.5 콘텐츠 작성 시 참고한 OpenAI 공식 Codex 문서입니다.
 
 - Codex Glossary: https://developers.openai.com/codex/glossary
 - Codex Best practices: https://developers.openai.com/codex/learn/best-practices

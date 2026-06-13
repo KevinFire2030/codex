@@ -34,7 +34,7 @@ body {
 
 .sidebar-toggle {
   position: fixed;
-  top: 20px;
+  top: 12px;
   left: 230px;
   z-index: 20;
   display: inline-flex;
@@ -42,7 +42,7 @@ body {
   gap: 10px;
   justify-content: center;
   width: 56px;
-  height: 32px;
+  height: 30px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -138,7 +138,7 @@ body {
   overflow-y: auto;
   border-right: 1px solid var(--line);
   background: var(--panel);
-  padding: 66px 18px 24px;
+  padding: 48px 18px 20px;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -157,8 +157,8 @@ body {
 
 .brand {
   border-bottom: 1px solid var(--line);
-  margin-bottom: 18px;
-  padding-bottom: 18px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
 }
 
 .brand p,
@@ -177,13 +177,15 @@ body {
 
 .sidebar nav {
   display: grid;
-  gap: 4px;
+  gap: 3px;
 }
 
 .sidebar a {
   border-radius: 6px;
   color: var(--muted);
-  padding: 8px 10px;
+  display: block;
+  line-height: 1.35;
+  padding: 7px 10px;
   text-decoration: none;
 }
 

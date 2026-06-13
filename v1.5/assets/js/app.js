@@ -148,14 +148,16 @@ function setActiveNav(sectionId) {
 }
 
 function updateActiveNav() {
-  const anchorLine = window.innerHeight * 0.35;
+  const anchorLine = Math.min(220, window.innerHeight * 0.28);
   const current =
-    sections
-      .map((section) => ({
-        id: section.id,
-        top: Math.abs(section.getBoundingClientRect().top - anchorLine),
-      }))
-      .sort((a, b) => a.top - b.top)[0] || sections[0];
+    sections.find((section) => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= anchorLine && rect.bottom > anchorLine;
+    }) ||
+    [...sections]
+      .reverse()
+      .find((section) => section.getBoundingClientRect().top <= anchorLine) ||
+    sections[0];
 
   if (current) setActiveNav(current.id);
 }
