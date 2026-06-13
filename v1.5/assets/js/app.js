@@ -41,7 +41,7 @@ function buildPromptCollection() {
 
     const title = document.createElement("div");
     title.className = "prompt-card-title";
-    title.innerHTML = `<strong>${promptNumber}. ${promptTitle}</strong><span>${sectionTitle}</span>`;
+    title.innerHTML = `<strong>#${promptNumber}. ${promptTitle}</strong><span>${sectionTitle}</span>`;
 
     const button = document.createElement("button");
     button.type = "button";
@@ -78,7 +78,7 @@ function buildPromptCollection() {
       const row = document.createElement("li");
       const link = document.createElement("a");
       link.href = `#${item.cardId}`;
-      link.innerText = `${item.number}. ${item.title}`;
+      link.innerText = `#${item.number}. ${item.title}`;
       row.appendChild(link);
       list.appendChild(row);
     });
