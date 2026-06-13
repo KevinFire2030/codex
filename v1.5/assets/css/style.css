@@ -34,14 +34,14 @@ body {
 
 .sidebar-toggle {
   position: fixed;
-  top: 14px;
-  left: 218px;
+  top: 8px;
+  left: 246px;
   z-index: 20;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   justify-content: center;
-  width: 56px;
+  width: 40px;
   height: 30px;
   border: 0;
   border-radius: 8px;
@@ -142,8 +142,8 @@ body {
 }
 
 .sidebar-collapsed .sidebar-toggle {
-  left: 14px;
-  top: 12px;
+  left: 10px;
+  top: 8px;
   width: 40px;
 }
 
