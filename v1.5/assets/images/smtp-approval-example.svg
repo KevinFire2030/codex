@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="780" viewBox="0 0 1100 780" role="img" aria-labelledby="title desc">
-  <title id="title">SMTP 사용 품의 예시</title>
-  <desc id="desc">SMTP 사용 신청 품의 화면을 교육용으로 마스킹해 재구성한 이미지</desc>
+  <title id="title">SMTP 사용 메모 결재 예시</title>
+  <desc id="desc">SMTP 사용 신청 메모 결재 화면을 교육용으로 마스킹해 재구성한 이미지</desc>
   <rect width="1100" height="780" fill="#ffffff"/>
   <rect x="0" y="0" width="1100" height="68" fill="#f4f6f8"/>
   <text x="28" y="42" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="22" fill="#1f2937">[결재통보] SMTP 사용 신청</text>
