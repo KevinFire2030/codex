@@ -21,23 +21,29 @@
   <rect x="28" y="352" width="1044" height="34" fill="#e5e7eb"/>
   <text x="34" y="375" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="16" fill="#111827">완결</text>
 
-  <rect x="28" y="405" width="1044" height="118" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="28" y="405" width="1044" height="152" fill="#ffffff" stroke="#e5e7eb"/>
   <text x="54" y="438" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#374151">순번</text>
   <text x="130" y="438" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#374151">구분</text>
   <text x="260" y="438" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#374151">성명</text>
   <text x="500" y="438" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#374151">부서명</text>
   <text x="820" y="438" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#374151">처리일시</text>
   <line x1="28" y1="455" x2="1072" y2="455" stroke="#e5e7eb"/>
+  <line x1="28" y1="507" x2="1072" y2="507" stroke="#e5e7eb"/>
   <text x="62" y="490" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">0</text>
   <text x="130" y="490" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">기안</text>
   <text x="260" y="490" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">홍길동</text>
   <text x="500" y="490" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">AX PM그룹</text>
   <text x="820" y="490" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">2026-04-28 10:02</text>
+  <text x="62" y="542" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">1</text>
+  <text x="130" y="542" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">결재</text>
+  <text x="260" y="542" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">파트장</text>
+  <text x="500" y="542" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">AX PM그룹</text>
+  <text x="820" y="542" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="14" fill="#111827">2026-04-28 11:00</text>
 
-  <text x="74" y="568" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="20" fill="#111827">AX 과제 PoC 진행을 위해 Outlook 메일 발신 사용 연장을 신청드립니다.</text>
-  <text x="74" y="600" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="20" fill="#111827">AI 에이전트 기반 SMTP 메일 송수신 기능 검증 목적입니다.</text>
+  <text x="74" y="600" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="20" fill="#111827">AX 과제 PoC 진행을 위해 Outlook 메일 발신 사용을 신청드립니다.</text>
+  <text x="74" y="632" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="20" fill="#111827">AI 에이전트 기반 SMTP 메일 송수신 기능 검증 목적입니다.</text>
 
-  <line x1="28" y1="640" x2="1072" y2="640" stroke="#d1d5db"/>
+  <line x1="28" y1="660" x2="1072" y2="660" stroke="#d1d5db"/>
   <text x="32" y="680" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="16" fill="#111827">□ 사용자 Knox Portal ID: &lt;MASKED_ID&gt;</text>
   <text x="32" y="710" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="16" fill="#111827">□ 사용자: 홍길동 / AX PM그룹</text>
   <text x="32" y="740" font-family="Malgun Gothic, Segoe UI, Arial, sans-serif" font-size="16" fill="#111827">□ 연장 기간: 승인 범위 내 기간</text>
