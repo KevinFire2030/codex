@@ -55,6 +55,7 @@ v1.4/index.html
 - `examples/excel-merge/TC.zip`: 동일 양식 엑셀 병합 실습용 ZIP
 - `examples/excel-merge/TC_merged.xlsx`: 엑셀 병합 결과
 - `examples/video-agent/work-script-recorder-package.zip`: 녹화파일 기반 Agent 구성 실습용 스크립트 녹화 도구 ZIP
+- `examples/skills/folder-cleanup-planner.zip`: 남이 만든 스킬 설치/사용 실습용 예제 ZIP
 
 ## 보안 원칙
 

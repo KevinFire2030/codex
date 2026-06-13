@@ -1695,21 +1695,6 @@ description: Use when the user wants to organize a messy folder safely by planni
             </tr>
           </tbody>
         </table>
-        <div class="prompt-box">
-          <button type="button" data-copy-target="prompt-skill">복사</button>
-          <pre id="prompt-skill"><code>내가 자주 반복하는 아래 업무를 Codex 스킬로 만들 수 있을지 판단해줘.
-
-업무:
-[반복 업무 설명]
-
-다음 형식으로 답해줘.
-1. 스킬로 만들 가치가 있는지
-2. 스킬 이름 후보
-3. 트리거 문장 예시
-4. 입력값과 출력값
-5. SKILL.md 초안
-6. 처음 버전에서 제외해야 할 범위</code></pre>
-        </div>
         <h3>실습 예시: 현재 환경의 도구/스킬 확인하기</h3>
         <div class="prompt-box">
           <button type="button" data-copy-target="prompt-tool-skill-list">복사</button>
@@ -1831,6 +1816,93 @@ description: Use when the user wants to organize a messy folder safely by planni
           <p>이런 요청은 <code>openai-docs</code> 스킬과 공식 문서 도구를 씁니다.</p>
           <pre><code>크롬으로 Knox Portal 접속해서 최근 메일 제목 알려줘</code></pre>
           <p>이런 요청은 <code>chrome:control-chrome</code> 스킬/도구를 씁니다.</p>
+        </div>
+
+        <h3>실습 예시: 반복 업무가 스킬 후보인지 판단하기</h3>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-skill">복사</button>
+          <pre id="prompt-skill"><code>내가 자주 반복하는 아래 업무를 Codex 스킬로 만들 수 있을지 판단해줘.
+
+업무:
+[반복 업무 설명]
+
+다음 형식으로 답해줘.
+1. 스킬로 만들 가치가 있는지
+2. 스킬 이름 후보
+3. 트리거 문장 예시
+4. 입력값과 출력값
+5. SKILL.md 초안
+6. 처음 버전에서 제외해야 할 범위</code></pre>
+        </div>
+        <h3>실제 반복 업무 설명 예시</h3>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-skill-gscm-value">복사</button>
+          <pre id="prompt-skill-gscm-value"><code>내가 자주 반복하는 아래 업무를 Codex 스킬로 만들 수 있을지 판단해줘.
+
+업무:
+Chrome에서 이미 로그인된 사내 세션을 사용해 GSCM에 접속한다.
+접속 URL은 https://mdscm.sec.samsung.net/nexa/index.html 이다.
+상단 메뉴에서 SCM &gt; Executive Report &gt; PSI로 이동한다.
+필요한 조회 조건을 확인한 뒤 Apply를 누른다.
+조회가 끝나면 오른쪽 상단 엑셀 다운로드 버튼을 눌러 PSI 결과 파일을 저장한다.
+다운로드한 파일은 지정한 작업 폴더에 GSCM_PSI_조회일자.xlsx 형식으로 보관한다.
+
+다음 형식으로 답해줘.
+1. 스킬로 만들 가치가 있는지
+2. 스킬 이름 후보
+3. 트리거 문장 예시
+4. 입력값과 출력값
+5. SKILL.md 초안
+6. 처음 버전에서 제외해야 할 범위</code></pre>
+        </div>
+        <div class="answer-box">
+          <h3>예시 답변</h3>
+          <p>이 업무는 반복 메뉴 이동, 조회 실행, 파일 다운로드, 저장 규칙이 명확하므로 스킬 후보로 적합합니다. 다만 로그인, 권한 확인, 실제 조회 조건 승인처럼 사람이 확인해야 하는 단계는 처음 버전에서 분리하는 것이 안전합니다.</p>
+          <ul>
+            <li>스킬 이름 후보: <code>gscm-psi-downloader</code>, <code>gscm-psi-report-helper</code></li>
+            <li>트리거 문장: <code>GSCM PSI 엑셀 받아줘</code>, <code>PSI 조회 결과 다운로드해줘</code></li>
+            <li>입력값: 조회일자, 저장 폴더, 파일명 suffix</li>
+            <li>출력값: 다운로드된 엑셀 파일 경로, 실행 로그, 실패 시 점검 항목</li>
+          </ul>
+        </div>
+
+        <h3>실습 예시: GSCM에서 PSI 다운로드 하는걸 스킬로 만들기</h3>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-skill-gscm-create">복사</button>
+          <pre id="prompt-skill-gscm-create"><code>GSCM에서 PSI 엑셀을 다운로드하는 반복 업무를 Codex 스킬로 만들고 싶어.
+
+스킬 이름은 gscm-psi-downloader로 해줘.
+
+업무 흐름:
+1. 이미 로그인된 Chrome 세션을 사용한다.
+2. https://mdscm.sec.samsung.net/nexa/index.html 에 접속한다.
+3. SCM &gt; Executive Report &gt; PSI 메뉴로 이동한다.
+4. 조회 조건을 확인하고 Apply를 누른다.
+5. 조회 완료 후 오른쪽 상단 엑셀 다운로드 버튼을 누른다.
+6. 다운로드 파일을 지정한 작업 폴더에 GSCM_PSI_조회일자.xlsx 형식으로 저장한다.
+
+제약:
+- 실제 계정, 비밀번호, OTP는 스킬에 넣지 않는다.
+- 조회 조건이 업무에 영향을 주면 실행 전에 사용자에게 확인한다.
+- 다운로드한 엑셀에 민감정보가 있으면 공유본에 첨부하지 않는다.
+- 처음 버전은 파일 다운로드까지만 다루고, 메일 발송이나 시스템 입력은 제외한다.
+
+출력:
+1. 권장 스킬 폴더 구조
+2. SKILL.md 초안
+3. 사용 프롬프트 예시
+4. 처음 버전에서 제외할 범위
+5. 테스트 체크리스트</code></pre>
+        </div>
+        <div class="answer-box">
+          <h3>예시 답변</h3>
+          <p><code>gscm-psi-downloader</code> 스킬은 GSCM PSI 조회와 엑셀 다운로드 절차를 반복 가능한 지침으로 정리하는 형태가 적합합니다. 실제 비밀번호는 스킬에 넣지 않고, 로그인된 Chrome 세션과 사용자 승인 조건을 전제로 둡니다.</p>
+          <pre><code>gscm-psi-downloader/
+  SKILL.md
+  README.md
+  examples/
+    gscm-psi-prompt.md</code></pre>
+          <p>첫 버전은 메뉴 이동, Apply, 엑셀 다운로드, 파일명 정리까지만 포함하고, 조회 조건 자동 변경이나 메일 발송은 별도 승인 후 확장하는 것이 안전합니다.</p>
         </div>
 
         <h3>실습 예시: 내가 만든 스킬을 zip으로 배포하기</h3>
@@ -1956,6 +2028,33 @@ Copy-Item `
   -Force</code></pre>
 
           <p>삭제 후 Codex를 다시 열거나 새 대화를 시작하면 해당 스킬을 더 이상 사용하지 않게 됩니다.</p>
+        </div>
+
+        <h3>실습 예시: 남이 만든 스킬 실제 사용하기</h3>
+        <p>아래 예제 스킬은 폴더 정리 계획을 세우는 연습용 샘플입니다. 설치 전에는 반드시 압축을 풀어 <code>SKILL.md</code> 내용을 먼저 확인합니다.</p>
+        <div class="download-actions">
+          <a class="download-button" href="examples/skills/folder-cleanup-planner.zip" download>스킬 예제 다운로드</a>
+        </div>
+        <div class="prompt-box">
+          <button type="button" data-copy-target="prompt-skill-use-example">복사</button>
+          <pre id="prompt-skill-use-example"><code>folder-cleanup-planner 스킬을 사용해서 이 폴더의 파일 정리 계획을 세워줘.
+
+조건:
+- 아직 파일을 이동하거나 삭제하지 마.
+- 파일 종류별로 분류 기준을 먼저 제안해줘.
+- 중복 파일은 삭제 후보가 아니라 검토 후보로만 표시해줘.
+- 실제 실행 전에 내가 확인해야 할 질문을 먼저 알려줘.
+
+출력:
+1. 현재 폴더 상태 요약
+2. 추천 정리 구조
+3. 이동 후보 목록
+4. 중복 검토 후보
+5. 실행 전 확인 질문</code></pre>
+        </div>
+        <div class="answer-box">
+          <h3>예시 답변</h3>
+          <p><code>folder-cleanup-planner</code> 스킬이 설치되어 있으면 Codex는 파일을 바로 옮기기보다 먼저 정리 기준과 후보 목록을 제안합니다. 이 단계에서는 실제 파일 변경 없이 계획만 확인하는 것이 핵심입니다.</p>
         </div>
       </section>
 
