@@ -410,7 +410,7 @@ th {
 .essential-badge {
   display: inline-flex;
   align-items: center;
-  margin: 12px 0 0 12px;
+  margin: 12px 14px 0 12px;
   border-radius: 999px;
   background: var(--accent);
   color: #fff;
@@ -423,6 +423,7 @@ th {
 .essential-prompt button {
   display: inline-block;
   float: right;
+  margin-left: 16px;
 }
 
 .essential-prompt pre {
